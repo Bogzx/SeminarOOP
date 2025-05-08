@@ -57,10 +57,11 @@ private:
 	 MediaItem* readLine(istream& is) {
 		string line;
 		getline(is, line);
-		vector<string> tokens = tokenize(line, ',');
-		if (tokens.size() < 5) // make sure the data we have is ok
-			//throw runtime_error("String invalid format");
+		if (line.empty()) // check if the line is empty
 			return nullptr;
+		vector<string> tokens = tokenize(line, ',');
+		if (tokens.size() !=7) // make sure the data we have is ok
+			throw runtime_error("String invalid format");
 		//Song(string title, string url, int duration, string artist)
 		if (tokens[0] == "song") {
 			return new Song(tokens[1], tokens[3], convertDurationToSeconds(tokens[2]), tokens[4]);
