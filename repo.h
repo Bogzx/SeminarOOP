@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 class Repo
 {
@@ -32,6 +33,32 @@ public:
 
 	Repo& operator=(const Repo& other) = delete;
 
+	MediaItem* delete_item(std::string title) {
+		int poz=find(title);
+		if (poz != -1) {
+			MediaItem* item = items[poz];
+			items.erase(items.begin() + poz);
+			return item;
+		}
+		else {
+			return nullptr; // not found
+
+		}
+
+	}
+
+
+
+	int find(std::string title) {
+		auto it = std::find_if(items.begin(), items.end(), [title](MediaItem* item) {return item->getTitle() == title; });
+		if (it != items.end()) {
+			return std::distance(items.begin(), it);
+		}
+		else {
+			return -1; // not found
+		}
+		
+	}
 
 
 };

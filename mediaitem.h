@@ -13,6 +13,9 @@ class MediaItem
 		MediaItem();
 
 		MediaItem(string title, string url, int duration);
+		string getTitle() const {
+			return title;
+		}
 
 };
 
